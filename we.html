@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Community Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================
+            New Modern Dark Theme by Gemini
+            ========================================
+        */
+        
+        :root {
+            --dark-bg: #0c122e;
+            --primary-accent: #48e5c2;
+            --secondary-accent: #05d9e8;
+            --text-light: #e0e0e0;
+            --text-dark: #b0b0b0;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --nav-bg: rgba(15, 23, 42, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            color: var(--text-light);
+            background: linear-gradient(135deg, #1d2b64 0%, var(--dark-bg) 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-accent);
+            text-shadow: 0 0 10px rgba(72, 229, 194, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(72, 229, 194, 0.3);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-light);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 3px;
+        }
+            
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .page {
+            display: none;
+            padding-top: 120px;
+            min-height: 100vh;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease;
+            background: linear-gradient(135deg, white, var(--primary-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        /* Team Cards */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .team-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 20px rgba(72, 229, 194, 0.2);
+            border-color: rgba(72, 229, 194, 0.5);
+        }
+
+        .team-emoji {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+            animation: bounce 2s infinite;
+        }
+
+        .team-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .team-card p {
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+            color: var(--dark-bg);
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(72, 229, 194, 0.3);
+        }
+
+        /* Team Page Styles */
+        .team-page {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            animation: slideInUp 0.6s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .team-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 3px solid var(--primary-accent);
+        }
+
+        .team-header h1 {
+            font-size: 3rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            margin: 2.5rem 0;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            border-left: 5px solid var(--primary-accent);
+        }
+
+        .section h2 {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .arabic-text {
+            direction: rtl;
+            text-align: right;
+            font-size: 1.2rem;
+            line-height: 2;
+            color:white;
+            background-color:white ;
+            /* background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent)); */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        .bullet-points {
+            list-style: none;
+            padding: 0;
+        }
+
+        .bullet-points li {
+            padding: 0.8rem 0;
+            position: relative;
+            padding-right: 2.5rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-light);
+            direction: rtl;
+            text-align: right;
+        }
+
+        .bullet-points li::before {
+            content: '🔹';
+            position: absolute;
+            right: 0;
+            top: 12px;
+            font-size: 1.2rem;
+            color: var(--primary-accent);
+        }
+        
+        .back-btn {
+            background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+            color: var(--dark-bg);
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(72, 229, 194, 0.3);
+        }
+         /* Apply Button Section - New */
+        .apply-section {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .apply-btn {
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            color: rgba(255, 255, 255, 0.6);
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--nav-bg);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .team-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .team-page { padding: 2rem 1.5rem; margin: 1rem 0; }
+            .team-header h1 { font-size: 2rem; }
+            .section { padding: 1.5rem; }
+            .container { padding: 0 1rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2rem; }
+            .team-emoji { font-size: 3rem; }
+            .team-card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"> </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" class="nav-link" data-page="scientific">Scientific Team</a></li>
+                <li><a href="#" class="nav-link" data-page="operations">Operations Team</a></li>
+                <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                <li><a href="#" class="nav-link" data-page="training">Training Team</a></li>
+                <li><a href="#" class="nav-link" data-page="media">Media Team</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page active" id="home">
+        <div class="container">
+            <div class="hero">
+                <h1>🚀 انضم لمجتمعنا - ابنِ، تعلم، ونافس معنا!</h1>
+                <p>اكتشف إمكانياتك، تواصل مع أفراد يشاركونك الشغف، وانطلق في رحلة مثيرة من النمو والابتكار.</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-card" onclick="showPage('scientific')">
+                    <span class="team-emoji">🚀</span>
+                    <h3>Scientific Team</h3>
+                    <p>قلب مجتمعنا - بناء المهارات وتعزيز قدرات حل المشكلات.</p>
+                    <button class="btn">Explore Team</button>
+                </div>
+                
+                <div class="team-card" onclick="showPage('operations')">
+                    <span class="team-emoji">⚙️</span>
+                    <h3>Operations Team</h3>
+                    <p>العمود الفقري الذي يضمن سير كل شيء بسلاسة خلف الكواليس.</p>
+                    <button class="btn">Explore Team</button>
+                </div>
+                
+                <div class="team-card" onclick="showPage('training')">
+                    <span class="team-emoji">📚</span>
+                    <h3>Training Team</h3>
+                    <p>واجهة مجتمعنا، يحولون المحتوى إلى رحلات تعلم شيقة.</p>
+                    <button class="btn">Explore Team</button>
+                </div>
+                
+                <div class="team-card" onclick="showPage('media')">
+                    <span class="team-emoji">🎥</span>
+                    <h3>Media Team</h3>
+                    <p>صوت وصورة مجتمعنا، يخلقون تجارب بصرية آسرة.</p>
+                    <button class="btn">Explore Team</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="scientific">
+        <div class="container">
+            <button class="back-btn" onclick="showPage('home')">→ Back</button>
+            <div class="team-page">
+                <div class="team-header">
+                    <h1>🚀 Scientific team </h1>
+                </div>
+                
+                <div class="section">
+                    <h2>💡 What is the Scientific Team?</h2>
+                    <div class="arabic-text">
+                        هو قلب الكوميونتي ❤️<br>
+                        هو اللي بيشيل كل حاجة بتبني مهاراتنا وتخلينا أقوى في الـ Problem Solving.<br>
+                        لو بتحب تفكر بطريقة مختلفة، وعاوز تسيب بصمة في رحلة تطوير زمايلك، ده التيم المناسب ليك 👑.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>🛠️ ماذا يفعل الفريق؟</h2>
+                    <ul class="bullet-points">
+                        <li>هنـعمل كونتستات<br>تختار المسائل وتبني كونتست ممتعة بمستويات مختلفة (من تدريب لحد Competitive قوية).</li>
+                        <li>تحضير Sheets<br>تعمل Sheets ذكية ومترتبة تساعد الناس تمشي Step by Step في تعلم الـ Topics.</li>
+                        <li>تنظيم Competitions<br>تعمل جو حماسي زي mini-contests سريعة أو حاجات كبيرة زي كامب الشتا أو كامب رمضان.</li>
+                        <li>نظام المسابقة<br>تجهز Rules واضحة وتدير المسابقات بجدية + تعمل Follow-up Sheets بعدها للـ Analysis.</li>
+                        <li>متابعة الأداء<br>تعمل Tracking Sheet وتوري الناس تقدمهم، وتساعدهم يعرفوا نقاط ضعفهم.</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2>🎯 لماذا تنضم للفريق؟</h2>
+                    <ul class="bullet-points">
+                        <li>هتبقى من المسؤولين عن صناعة الأبطال اللي هيمثلوا الجامعة في المسابقات.</li>
+                        <li>هتتعلم بنفسك كويس جدًا لأنك بتحضر محتوى لغيرك (أفضل طريقة للتعلم هي إنك تشرح).</li>
+                        <li>هتكون سبب في إن زمايلك يتحسنوا، وكل نجاح ليهم هيبقى ليك فيه فضل.</li>
+                        <li>هيبقى عندك فرصة تبني مسابقات وتحديات خاصة باسمك وتفتخر إنك كنت السبب في نجاحها.</li>
+                        <li>جو الفريق كله قايم على الإبداع + التفكير خارج الصندوق.</li>
+                    </ul>
+                </div>
+                <div class="apply-section">
+                    <a href="https://forms.gle/VoQ39gzvsDSPYjSb7" class="btn apply-btn">Apply now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="operations">
+        <div class="container">
+            <button class="back-btn" onclick="showPage('home')">back</button>
+            <div class="team-page">
+                <div class="team-header">
+                    <h1>⚙️ Operations Team</h1>
+                </div>
+                
+                <div class="section">
+                    <h2>💡 What is the Operations Team?</h2>
+                    <div class="arabic-text">
+                        ⚙️ العمود الفقري للكوميونتي 🏗️🔥<br><br>
+                        هو اللي بيخلي كل حاجة ماشية بسلاسة… من أول تجهيز المكان لحد إدارة المسابقات والفعاليات.<br>
+                        لو بتحب التنظيم، التركيز على التفاصيل، وتحب تبقى الشخص اللي "وراء الكواليس" يضمن إن كل حاجة شغالة زي الساعة ⏰… التيم ده ليك!
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>🎯 ماذا يفعل الفريق؟</h2>
+                    <ul class="bullet-points">
+                        <li>إدارة اللوجستيات: ترتيب القاعات، الأدوات، الأجهزة، وكل المتطلبات قبل أي حدث.</li>
+                        <li>تنظيم الفعاليات: ضمان إن السيشن/المسابقة تبدأ وتنتهي في مواعيدها.</li>
+                        <li>التنسيق مع الفرق التانية: زي العلمي والتدريب والإعلامي علشان كل حاجة تمشي بانسجام.</li>
+                        <li>متابعة النظام أثناء المسابقات: التأكد إن القوانين متطبقة، وحل أي مشكلة تقنية أو تنظيمية.</li>
+                        <li>تجهيز الـ Materials: بطاقات، قوائم، أو أي حاجة تساعد في إدارة الأحداث.</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2>🔥 لماذا تنضم للفريق؟</h2>
+                    <ul class="bullet-points">
+                        <li>هتكتسب مهارات قوية في التنظيم وإدارة الفعاليات.</li>
+                        <li>هتتعلم إزاي تشتغل تحت ضغط وتخلي الأمور ماشية بمرونة.</li>
+                        <li>هيبقى عندك خبرة حقيقية في Problem-Solving من نوع مختلف (حل مشاكل على أرض الواقع).</li>
+                        <li>هتكون جزء من الفريق اللي بيخلي كل فكرة تتحول لواقع ملموس.</li>
+                        <li>هتتعلم Leadership Skills لأنك دايمًا في قلب الأحداث.</li>
+                        <li>كل الناس هتعتمد عليك وتفتكر إنك السبب إن الفعاليات ماشية مظبوطة.</li>
+                    </ul>
+                </div>
+                <div class="apply-section">
+                    <a href="https://forms.gle/VoQ39gzvsDSPYjSb7" class="btn apply-btn">Apply now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="training">
+        <div class="container">
+            <button class="back-btn" onclick="showPage('home')">→ Back</button>
+            <div class="team-page">
+                <div class="team-header">
+                    <h1>📚 Training Team</h1>
+                </div>
+                
+                <div class="section">
+                    <h2>💡 What is the Training Team?</h2>
+                    <div class="arabic-text">
+                        هو الواجهة بتاعة الكوميونيتى🚀<br>
+                        هو اللي بيحوّل المحتوى لرحلة ممتعة وسهلة لأي حد في الكوميونتي.<br>
+                        لو بتحب تشرح، تتواصل مع الناس، وتخلي المعلومة أبسط، ده المكان اللي هتبدع فيه 👑.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>🎯 ماذا يفعل الفريق؟</h2>
+                    <ul class="bullet-points">
+                        <li>تقديم Sessions<br>شرح Topics مختلفة بمستويات متدرجة.</li>
+                        <li>Workshops<br>مش بس شرح، لكن تدريب عملي مباشر على مسائل.</li>
+                        <li>Mentorship<br>مساعدة الأعضاء الجدد، متابعة تقدمهم، والرد على أسئلتهم.</li>
+                        <li>Mini Challenges<br>أنشطة صغيرة في نص السيشن أو بين الجلسات للحماس.</li>
+                        <li>Follow-up<br>مراجعة سريعة في بداية كل سيشن عشان نتأكد إن الناس استوعبت اللي فات.</li>
+                        <li>تحفيز وتشجيع<br>خلق جو ممتع يخلي الناس تحب الـ Problem Solving وتكمل.</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2>🔥 لماذا تنضم للفريق؟</h2>
+                    <ul class="bullet-points">
+                        <li>هتطور مهاراتك في الشرح والعرض (Skill مهمة جدًا لأي مبرمج أو مهندس).</li>
+                        <li>هتثبت معلوماتك 10x أكتر، لأن أفضل طريقة للتعلم إنك تدرّب غيرك.</li>
+                        <li>هتتعرف على ناس كتير وتكون قدوة للجيل الجديد من الـ Problem Solvers.</li>
+                        <li>هتبني Legacy في الكوميونتي… الناس دايمًا هتفتكر مين اللي شرح لهم الأساسيات.</li>
+                        <li>هتتعلم Skills جانبية مهمة زي: Public Speaking – Leadership – Time Management.</li>
+                    </ul>
+                </div>
+                <div class="apply-section">
+                    <a href="https://forms.gle/VoQ39gzvsDSPYjSb7" class="btn apply-btn">Apply now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="media">
+        <div class="container">
+            <button class="back-btn" onclick="showPage('home')">→ Back</button>
+            <div class="team-page">
+                <div class="team-header">
+                    <h1>🎥 Media Team</h1>
+                </div>
+                
+                <div class="section">
+                    <h2>💡 ما هو الفريق الإعلامي؟</h2>
+                    <div class="arabic-text">
+                        <strong>🎥 صوت وصورة الكوميونتي 🎨✨</strong><br>
+                        هو اللي بيخلي شغلنا يوصل للناس بشكل جذاب، وبيحوّل أي حدث أو مسابقة لتجربة يفتكرها الكل. لو عندك إبداع، عين فنية، أو بتحب تشتغل على الـ Content… التيم ده هو ملعبك 🖌️📸.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>🎯 ماذا يفعل الفريق؟</h2>
+                    <ul class="bullet-points">
+                        <li><strong>تصميم الـ Visuals</strong>: Posters، Bannners، Presentations، وSocial Media Content.</li>
+                        <li><strong>التغطية الإعلامية</strong>: تصوير الفعاليات، عمل Reels وفيديوهات مختصرة توصل vibe الأحداث.</li>
+                        <li><strong>Social Media Management</strong>: إدارة صفحات الكوميونتي، ونشر أخبار وجداول ومفاجآت.</li>
+                        <li><strong>Content Writing</strong>: كتابة Captions، Posts، وإعلانات بشكل جذاب وبسيط.</li>
+                        <li><strong>Storytelling</strong>: نقل تجربة الكوميونتي للناس من خلال صور وفيديوهات بتوصل المشاعر.</li>
+                        <li><strong>Branding</strong>: الحفاظ على هوية الكوميونتي بشكل ثابت واحترافي.</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2>🔥 لماذا تنضم للفريق؟</h2>
+                    <ul class="bullet-points">
+                        <li>هتطوّر مهاراتك في <strong>التصميم والتصوير والمونتاج</strong>.</li>
+                        <li>هتتعلم إزاي تشتغل باحتراف على Social Media Platforms.</li>
+                        <li>هيبقى ليك Portfolio حقيقي تقدر تعرضه في شغلك أو دراستك.</li>
+                        <li>هتكون جزء من الفريق اللي بيخلي الكوميونتي معروف وملفت للأنظار.</li>
+                        <li>هتجمع بين <strong>الإبداع + التأثير</strong>… شغلك هيوصل للناس ويخليهم متحمسين ينضموا.</li>
+                        <li>هتبقى سبب إن أي نجاح يحصل يوصل لعدد أكبر من الناس.</li>
+                    </ul>
+                </div>
+                <div class="apply-section">
+                    <a href="https://forms.gle/VoQ39gzvsDSPYjSb7" class="btn apply-btn">Apply now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Community Showcase. تم تصميمه بشغف للنمو والابتكار.</p>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        const navLinkElements = document.querySelectorAll('.nav-link');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            document.getElementById(pageId).classList.add('active');
+            
+            navLinkElements.forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.page === pageId) {
+                    link.classList.add('active');
+                }
+            });
+            
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        navLinkElements.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = link.dataset.page;
+                showPage(pageId);
+            });
+        });
+        
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
